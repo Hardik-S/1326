@@ -81,10 +81,10 @@ Relationship-year mapping (reverse chronological, newest to oldest):
 - **Dec 28 → 2022**
 - **Dec 29 → 2021**
 - **Dec 30 → 2020**
-- **Jan 1 → 2018**
+- **Jan 1 → 2019**
 
 Notes:
-- If 2019 must be included instead of 2018, adjust the mapping to match the actual relationship timeline.  
+- If the final year should be 2018 instead of 2019, adjust the mapping to match the actual relationship timeline.  
 - The site logic should not hardcode “relationship year numbers”; it should display labels driven by content data.
 
 ---

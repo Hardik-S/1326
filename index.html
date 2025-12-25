@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
+    <button class="admin-toggle" id="admin-toggle" type="button">Admin mode</button>
     <header class="site-header">
       <p class="eyebrow">In reverse, with love</p>
       <h1>We begin where we are</h1>
@@ -42,7 +43,7 @@
             <input type="password" id="passphrase" placeholder="Passphrase" autocomplete="off" />
             <button class="btn" id="unlock-btn">Open</button>
           </div>
-          <p class="gate-hint">Hint: a favorite cozy word.</p>
+          <p class="gate-hint" id="gate-hint"></p>
           <p class="gate-error" id="gate-error" aria-live="polite"></p>
         </div>
 

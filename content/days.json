@@ -6,14 +6,81 @@
     "body": "This advent calendar begins at the end because this year has asked us to stop hiding behind beginnings and explanations. Starting in reverse feels honest. What matters now is not how long we have loved each other, but how deliberately we choose to be here, in this moment, with everything that is still unfinished. I love you very much. I am scared sometimes, and unsure, and still here. I am grateful that we are counting down to the new year together, holding what we have with care, and facing whatever comes next without turning away.",
     "media": {
       "type": "image",
-      "src": "20251216_161834-ANIMATION.gif",
-      "alt": "A gentle animated moment"
-    }
+      "src": "media/2025.gif",
+      "alt": "Animated memory from 2025"
+    },
+    "passphraseHint": "Our ___ love!"
   },
-  { "date": "2025-12-26", "year": "2024" },
-  { "date": "2025-12-27", "year": "2023" },
-  { "date": "2025-12-28", "year": "2022" },
-  { "date": "2025-12-29", "year": "2021" },
-  { "date": "2025-12-30", "year": "2020" },
-  { "date": "2026-01-01", "year": "2018" }
+  {
+    "date": "2025-12-26",
+    "year": "2024",
+    "title": "Choosing to Stay",
+    "body": "In 2024, staying stopped being automatic. There were moments when I felt overwhelmed, defensive, and unsure of myself, and moments when leaving would have been easier than remaining present. I did not always stay gracefully or consistently, and I know that mattered. Still, I chose you again and again, sometimes late, sometimes imperfectly, but honestly. This was the year I learned that love is measured less by intention and more by the willingness to remain when things are hard and revealing. You showed me infinite grace, and I will perpetually honor it in kind.",
+    "media": {
+      "type": "image",
+      "src": "media/2024.gif",
+      "alt": "Animated memory from 2024"
+    },
+    "passphraseHint": "I promise to always ___ for our love."
+  },
+  {
+    "date": "2025-12-27",
+    "year": "2023",
+    "title": "Seeing Each Other Clearly",
+    "body": "In 2023, we stopped hiding behind misunderstanding. I began to see how often my fear showed up as silence, distance, or avoidance, and how deeply that hurt you. You saw parts of me I had been unwilling to name, and that exposure scared me more than I admitted. Being seen this clearly was painful, but it was also real. I learned that confusion felt safer, but honesty was necessary. I knew already that I had to change, and I had all the right intentions but none of the mechanisms figured out. You showed me forgiveness for stagnation, and I will remember that love any time I am in too much of a rush.",
+    "media": {
+      "type": "image",
+      "src": "media/2023.gif",
+      "alt": "Animated memory from 2023"
+    },
+    "passphraseHint": "____ pouts are delicious, but it is more fun to travel to"
+  },
+  {
+    "date": "2025-12-28",
+    "year": "2022",
+    "title": "Carrying What Was Hard",
+    "body": "In 2022, love became heavy. There were conversations we delayed, hurts that lingered, and days when endurance gave way to exhaustion - this was the norm. I fell to my weaknesses rather than rising with my strengths. I did not always know how to hold what you were feeling, and unfortunately I added to the weight instead of sharing it. Still, we kept returning to each other. Looking back, I see how much effort it took just to stay alive, in a room together, with hope for a better future.",
+    "media": {
+      "type": "image",
+      "src": "media/2022.gif",
+      "alt": "Animated memory from 2022"
+    },
+    "passphraseHint": "Never gonna give you up, never gonna ___ ___ ____."
+  },
+  {
+    "date": "2025-12-29",
+    "year": "2021",
+    "title": "Learning What Safety Means",
+    "body": "In 2021, stability was something we wanted more than something we trusted. I was still learning how not to withdraw when things felt intense, and you were still learning how to rest without bracing for loss. Safety felt fragile then, easily shaken. That year taught me that safety is not created by words or reassurance alone, but by repeated presence, even when fear is loud.",
+    "media": {
+      "type": "image",
+      "src": "media/2021.gif",
+      "alt": "Animated memory from 2021"
+    },
+    "passphraseHint": "No matter how dark it gets, our love will ____ up the whole universe!"
+  },
+  {
+    "date": "2025-12-30",
+    "year": "2020",
+    "title": "Becoming Someone New",
+    "body": "In 2020, change began quietly. I did not yet understand how deeply my patterns would affect us, or how much growth would be required of me. I was learning in theory more than in action, and I know that left you carrying uncertainty at times. Loving you started to change me long before I knew how to change on purpose. This was a good year for us. I was really curious about how to love you. I am back to doing more of that :)",
+    "media": {
+      "type": "image",
+      "src": "media/2020.gif",
+      "alt": "Animated memory from 2020"
+    },
+    "passphraseHint": "My favorite US state at this point"
+  },
+  {
+    "date": "2026-01-01",
+    "year": "2019",
+    "title": "The Beginning",
+    "body": "In 2019, there was recognition before understanding. We did not know what we were stepping into or how much we would ask of each other over time. There was excitement, closeness, and a sense that something meaningful had begun without guarantees attached. I do not want to idealize that beginning, but I do not want to forget it either. Everything we became started there.",
+    "media": {
+      "type": "image",
+      "src": "media/2019.gif",
+      "alt": "Animated memory from 2019"
+    },
+    "passphraseHint": "I will kiss you often and with ______."
+  }
 ]

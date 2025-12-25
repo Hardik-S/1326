@@ -24,12 +24,31 @@ const gateTitle = document.getElementById("gate-title");
 const passphraseInput = document.getElementById("passphrase");
 const unlockBtn = document.getElementById("unlock-btn");
 const gateError = document.getElementById("gate-error");
+const gateHint = document.getElementById("gate-hint");
 const contentDate = document.getElementById("content-date");
 const contentTitle = document.getElementById("content-title");
 const contentBody = document.getElementById("content-body");
 const mediaSlot = document.getElementById("media-slot");
+const adminToggle = document.getElementById("admin-toggle");
 
 let activeIndex = null;
+let adminMode = false;
+
+function readAdminMode() {
+  return localStorage.getItem("adminMode") === "true";
+}
+
+function writeAdminMode(value) {
+  localStorage.setItem("adminMode", value ? "true" : "false");
+}
+
+function setAdminMode(value) {
+  adminMode = value;
+  writeAdminMode(value);
+  adminToggle.classList.toggle("active", value);
+  adminToggle.textContent = value ? "Admin: all unlocked" : "Admin mode";
+  renderOrnaments();
+}
 
 function getTodayInTimeZone(timeZone) {
   const formatter = new Intl.DateTimeFormat("en-CA", {
@@ -94,7 +113,7 @@ function closeModal() {
 
 function renderOrnaments() {
   const today = getTodayInTimeZone(TIME_ZONE);
-  const latestUnlockedIndex = getLatestUnlockedIndex(today);
+  const latestUnlockedIndex = adminMode ? ORNAMENTS.length - 1 : getLatestUnlockedIndex(today);
   const opened = readOpened();
 
   layer.innerHTML = "";
@@ -149,7 +168,15 @@ function handleOrnamentClick(index, today, latestUnlockedIndex) {
     return;
   }
 
+  if (adminMode) {
+    populateContent(ornament);
+    setModalState("content");
+    openModal();
+    return;
+  }
+
   gateTitle.textContent = `Ornament for ${ornament.year}`;
+  gateHint.textContent = ornament.passphraseHint ? `Hint: ${ornament.passphraseHint}` : "";
   setModalState("gate");
   openModal();
   passphraseInput.focus();
@@ -240,6 +267,7 @@ async function loadPassphrases() {
 async function init() {
   await loadContent();
   await loadPassphrases();
+  setAdminMode(readAdminMode());
   renderOrnaments();
 }
 
@@ -253,6 +281,19 @@ unlockBtn.addEventListener("click", unlockActiveOrnament);
 passphraseInput.addEventListener("keydown", (event) => {
   if (event.key === "Enter") {
     unlockActiveOrnament();
+  }
+});
+
+adminToggle.addEventListener("click", () => {
+  if (adminMode) {
+    setAdminMode(false);
+    return;
+  }
+  const attempt = window.prompt("Enter admin password:");
+  if (attempt === "admin123") {
+    setAdminMode(true);
+  } else if (attempt !== null) {
+    window.alert("That password does not match.");
   }
 });
 
