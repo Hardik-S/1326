@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tree of Days</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <p class="eyebrow">A winter countdown</p>
+      <h1>Tree of Days</h1>
+      <p class="subhead">One ornament unlocks each day, Dec 25 through Jan 1.</p>
+    </header>
+
+    <main>
+      <section class="tree-wrap" aria-label="Ornament tree">
+        <img class="tree-image" src="Tree.png" alt="A cozy evergreen tree" />
+        <div class="ornament-layer" id="ornament-layer" aria-live="polite"></div>
+      </section>
+    </main>
+
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true">
+      <div class="modal-card" role="document">
+        <button class="modal-close" id="modal-close" aria-label="Close">&times;</button>
+
+        <div class="modal-locked" id="modal-locked" hidden>
+          <p class="modal-eyebrow">Locked</p>
+          <h2 class="modal-title">Come back on <span id="locked-date"></span></h2>
+          <p class="modal-body">This ornament opens on its day. Cozy patience encouraged.</p>
+        </div>
+
+        <div class="modal-gate" id="modal-gate" hidden>
+          <p class="modal-eyebrow">Unlock</p>
+          <h2 class="modal-title" id="gate-title"></h2>
+          <p class="modal-body">Enter the passphrase to open this ornament.</p>
+          <div class="gate-row">
+            <input type="password" id="passphrase" placeholder="Passphrase" autocomplete="off" />
+            <button class="btn" id="unlock-btn">Open</button>
+          </div>
+          <p class="gate-hint">Hint: a favorite cozy word.</p>
+          <p class="gate-error" id="gate-error" aria-live="polite"></p>
+        </div>
+
+        <div class="modal-content" id="modal-content" hidden>
+          <p class="modal-eyebrow" id="content-date"></p>
+          <h2 class="modal-title" id="content-title"></h2>
+          <p class="modal-body" id="content-body"></p>
+          <div class="media-slot">
+            <div class="media-placeholder">Media placeholder</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,239 @@
+# plan.md
+
+## Purpose
+
+Build a private 7-day “tree + ornaments” website where one ornament unlocks per day.  
+v1 delivers the functional site and tree.  
+v2 adds Day 1 content, then expands to all 7 days.
+
+Key updates in this plan:
+- **Window:** Dec 25 → Jan 1 (7 days inclusive)
+- **Narrative order (reversed):** **2025 → 2018** across the 7 days
+- **Delivery:** v1 (functional) then v2 (content)
+
+---
+
+## Release Phases
+
+### v1: Functional Website + Tree (No real content required)
+Goal: A complete working experience with placeholders that proves navigation, unlock logic, and polish.
+
+Deliverables:
+- Landing page with **tree** and **7 ornaments**
+- Ornament states: **locked / available today / opened**
+- Unlock gating by **local date** (America/Toronto)
+- Ornament detail view (modal or page) with placeholder:
+  - title
+  - text block
+  - media slot (image/video)
+- Progress persistence:
+  - “opened” state stored locally (LocalStorage) at minimum
+- Basic privacy posture:
+  - no analytics by default
+  - no external calls except hosting
+- Build + deploy pipeline (static hosting)
+
+Out of scope for v1:
+- final writing
+- final photos/videos
+- final passphrases (if used)
+- any “in person vs remote” choreography
+
+Acceptance criteria:
+- On each date, exactly one new ornament becomes available.
+- Past ornaments remain openable.
+- Future ornaments remain locked.
+- Works on mobile and desktop.
+
+---
+
+### v2: Content for Day 1, then all 7 days
+Goal: Replace placeholders with real writing + media, starting with Day 1 (Dec 25).
+
+Deliverables:
+- Day 1 content fully integrated (copy + media)
+- Content data structure for all 7 days
+- Media assets embedded/linked consistently (optimized)
+- Final QA pass for tone, typos, and media playback
+
+Acceptance criteria:
+- Day 1 feels complete and intentional.
+- Remaining days have either placeholders or complete content depending on readiness.
+- No broken links, missing assets, or layout regressions.
+
+---
+
+## Calendar Window and Content Mapping (Reversed Year Order)
+
+7 days inclusive:
+1) Dec 25
+2) Dec 26
+3) Dec 27
+4) Dec 28
+5) Dec 29
+6) Dec 30
+7) Jan 1
+
+Relationship-year mapping (reverse chronological, newest to oldest):
+- **Dec 25 → 2025**
+- **Dec 26 → 2024**
+- **Dec 27 → 2023**
+- **Dec 28 → 2022**
+- **Dec 29 → 2021**
+- **Dec 30 → 2020**
+- **Jan 1 → 2018**
+
+Notes:
+- If 2019 must be included instead of 2018, adjust the mapping to match the actual relationship timeline.  
+- The site logic should not hardcode “relationship year numbers”; it should display labels driven by content data.
+
+---
+
+## Core UX
+
+### Tree Page
+- Tree illustration/graphic
+- 7 ornaments positioned consistently
+- Each ornament shows state:
+  - Locked: subdued + non-interactive
+  - Available today: subtle highlight
+  - Opened: “completed” style
+
+### Ornament View
+Each ornament reveals:
+- Title (short)
+- One paragraph of text (tight)
+- Media slot (video preferred, image acceptable)
+
+After viewing:
+- Return to tree (close modal / back)
+- Ornament shows “opened”
+
+No:
+- comments
+- branching
+- user-generated input beyond opening
+
+---
+
+## Unlock Logic
+
+Primary gating: **date-based unlock** (America/Toronto local date).
+- A day’s ornament unlocks at 00:00 local time.
+- Past days remain openable.
+
+Optional gating (only if desired): passphrase per ornament
+- If added, the passphrase should be required only for the current day (or for all days, consistently).
+- Passphrases should not be guessable out of order.
+
+Implementation notes:
+- Compute “today” in the client using a fixed timezone approach.
+  - Preferred: store unlock timestamps in UTC and compare with timezone conversion.
+  - Acceptable: treat user device time as source of truth if this is strictly private and low-stakes.
+
+---
+
+## Content Data Model (Recommended)
+
+Create a single source of truth, e.g. `content/days.json`:
+- `date` (YYYY-MM-DD)
+- `year` (2025 … 2018)
+- `title`
+- `body` (single paragraph)
+- `media`:
+  - `type`: `video` | `image`
+  - `src`: asset path or URL
+  - `alt` (for accessibility)
+- Optional:
+  - `passphraseHint`
+  - `passphraseHash` (never store plaintext passphrases in repo if avoidable)
+
+This keeps UI code stable while content iterates.
+
+---
+
+## Media Strategy
+
+Target:
+- 5–10 second loopable clip per day (optional in v2 if not ready)
+
+Constraints:
+- minimal motion
+- warm, realistic
+- no fast cuts
+- avoid heavy stylization
+
+Asset handling:
+- Host videos locally in repo or via a private bucket/CDN.
+- Optimize:
+  - small resolution suitable for mobile
+  - compressed format (mp4/h264 baseline is simplest)
+- Provide poster frames for smooth loading.
+
+---
+
+## What Requires Human Input (Explicit)
+
+These items cannot be safely automated and must be provided or approved by a human.
+
+### Required for v2 Day 1 (Dec 25 / 2025)
+- Final **Day 1 title**
+- Final **Day 1 paragraph**
+- Day 1 **photo/video source** (or final exported clip)
+- Any **sensitive boundaries** (topics to avoid, tone constraints)
+
+### Required for the full 7 days
+For each day (Dec 25 → Jan 1):
+- One paragraph of text (final)
+- One media asset (or a decision to omit media)
+- Confirmed year mapping accuracy (2025 → 2018)
+- Any day-specific “in person vs remote” instruction if you want that dynamic
+
+### Optional but human-decided
+- Whether to use passphrases at all
+- If passphrases are used:
+  - the passphrases themselves
+  - the hint style (opaque vs direct)
+- Visual style direction (minimalist vs more decorative)
+- Hosting choice and privacy posture (public link vs gated)
+
+---
+
+## Engineering Checklist
+
+### v1 Tasks
+- Scaffold app (static site framework or vanilla)
+- Build tree layout + ornament components
+- Implement date gating for 7 fixed dates
+- Implement ornament detail view
+- Implement opened-state persistence (LocalStorage)
+- Accessibility pass (keyboard nav, alt text placeholders)
+- Responsive pass (mobile first)
+- Deploy + confirm routing works
+
+### v2 Tasks (Day 1 first)
+- Add content file (`days.json`) and wire UI to it
+- Replace Day 1 placeholders with final content + media
+- Add remaining day stubs with placeholders (or fill fully)
+- Media optimization + preload strategy
+- Final QA on devices
+
+---
+
+## Non-Goals
+- Gamification
+- Social sharing
+- Analytics/metrics
+- Multi-user accounts
+- Server-side generation
+
+---
+
+## Success Criteria
+- Consuming a day takes < 1 minute.
+- Unlock progression is obvious and reliable.
+- Reverse-chronological arc (2025 → 2018) is felt without explanation.
+- The site stays lightweight and stable.
+
+---
+End of plan.md
