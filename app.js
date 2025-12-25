@@ -1,15 +1,7 @@
 const PASS_PHRASE = "Kimchi";
 const TIME_ZONE = "America/Toronto";
 
-const ORNAMENTS = [
-  { date: "2025-12-25", year: "2025" },
-  { date: "2025-12-26", year: "2024" },
-  { date: "2025-12-27", year: "2023" },
-  { date: "2025-12-28", year: "2022" },
-  { date: "2025-12-29", year: "2021" },
-  { date: "2025-12-30", year: "2020" },
-  { date: "2026-01-01", year: "2018" },
-];
+let ORNAMENTS = [];
 
 const ORNAMENT_POSITIONS = [
   { top: "25.12%", left: "50.3%" },
@@ -35,6 +27,7 @@ const gateError = document.getElementById("gate-error");
 const contentDate = document.getElementById("content-date");
 const contentTitle = document.getElementById("content-title");
 const contentBody = document.getElementById("content-body");
+const mediaSlot = document.getElementById("media-slot");
 
 let activeIndex = null;
 
@@ -164,9 +157,32 @@ function handleOrnamentClick(index, today, latestUnlockedIndex) {
 
 function populateContent(ornament) {
   contentDate.textContent = `${formatDisplayDate(ornament.date)} · ${ornament.year}`;
-  contentTitle.textContent = `A memory from ${ornament.year}`;
+  contentTitle.textContent = ornament.title || `A memory from ${ornament.year}`;
   contentBody.textContent =
+    ornament.body ||
     "Placeholder: a short, tender paragraph about this year will live here. It should feel warm, honest, and intimate.";
+
+  mediaSlot.innerHTML = "";
+  if (ornament.media && ornament.media.type && ornament.media.src) {
+    if (ornament.media.type === "video") {
+      const video = document.createElement("video");
+      video.controls = true;
+      video.playsInline = true;
+      video.src = ornament.media.src;
+      video.setAttribute("aria-label", ornament.media.alt || "Ornament video");
+      mediaSlot.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.src = ornament.media.src;
+      img.alt = ornament.media.alt || "Ornament image";
+      mediaSlot.appendChild(img);
+    }
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "media-placeholder";
+    placeholder.textContent = "Media placeholder";
+    mediaSlot.appendChild(placeholder);
+  }
 }
 
 function unlockActiveOrnament() {
@@ -192,6 +208,23 @@ function unlockActiveOrnament() {
   renderOrnaments();
 }
 
+async function loadContent() {
+  try {
+    const response = await fetch("content/days.json");
+    if (!response.ok) {
+      throw new Error(`Failed to load content: ${response.status}`);
+    }
+    ORNAMENTS = await response.json();
+  } catch (err) {
+    ORNAMENTS = [];
+  }
+}
+
+async function init() {
+  await loadContent();
+  renderOrnaments();
+}
+
 modalClose.addEventListener("click", closeModal);
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
@@ -205,4 +238,4 @@ passphraseInput.addEventListener("keydown", (event) => {
   }
 });
 
-renderOrnaments();
+init();

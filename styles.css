@@ -229,6 +229,17 @@ h1 {
   padding: 18px;
   text-align: center;
   background: rgba(255, 255, 255, 0.6);
+  max-height: 45vh;
+  overflow: hidden;
+}
+
+.media-slot img,
+.media-slot video {
+  display: block;
+  width: 100%;
+  border-radius: 10px;
+  max-height: 40vh;
+  object-fit: contain;
 }
 
 .media-placeholder {

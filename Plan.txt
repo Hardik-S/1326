@@ -135,7 +135,7 @@ Implementation notes:
 
 ## Content Data Model (Recommended)
 
-Create a single source of truth, e.g. `content/days.json`:
+Create a single source of truth, e.g. `content/days.json` (now created in repo):
 - `date` (YYYY-MM-DD)
 - `year` (2025 … 2018)
 - `title`
