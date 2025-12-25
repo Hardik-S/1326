@@ -1,7 +1,7 @@
-const PASS_PHRASE = "Kimchi";
 const TIME_ZONE = "America/Toronto";
 
 let ORNAMENTS = [];
+let PASS_PHRASES = [];
 
 const ORNAMENT_POSITIONS = [
   { top: "25.12%", left: "50.3%" },
@@ -191,7 +191,12 @@ function unlockActiveOrnament() {
   }
 
   const attempt = passphraseInput.value.trim();
-  if (attempt.toLowerCase() !== PASS_PHRASE.toLowerCase()) {
+  const expected = PASS_PHRASES[activeIndex];
+  if (!expected) {
+    gateError.textContent = "Passphrases are not available yet.";
+    return;
+  }
+  if (attempt.toLowerCase() !== expected.toLowerCase()) {
     gateError.textContent = "That passphrase does not match.";
     return;
   }
@@ -220,8 +225,21 @@ async function loadContent() {
   }
 }
 
+async function loadPassphrases() {
+  try {
+    const response = await fetch("content/passphrases.json");
+    if (!response.ok) {
+      throw new Error(`Failed to load passphrases: ${response.status}`);
+    }
+    PASS_PHRASES = await response.json();
+  } catch (err) {
+    PASS_PHRASES = [];
+  }
+}
+
 async function init() {
   await loadContent();
+  await loadPassphrases();
   renderOrnaments();
 }
 
